@@ -1,1 +1,77 @@
-<h1>Home Page. {{ title }}</h1>
+<div class="container">
+  <div class="card-grid">
+    <!-- Card 1 -->
+    <div class="card" *ngFor="let person of data">
+      <div class="card-header">
+        <img
+          src="https://i.pravatar.cc/100?img=1"
+          alt="User Avatar"
+          class="avatar"
+        />
+      </div>
+      <div class="card-body">
+        <h3 class="name">{{ person.name }}</h3>
+        <p><strong>Email</strong> : {{ person.email }}</p>
+        <p><strong>Phone</strong> : {{ person.phone }}</p>
+        <p><strong>Age</strong> : {{ person.age }}</p>
+        <button (click)="editPerson($event, person.id)">
+          Edit
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Overlay -->
+  <div class="modal-overlay" *ngIf="isModel">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>Edit User</h2>
+        <button (click)="closeModel($event)" class="close-btn">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <label>
+          Name:
+          <input
+            [(ngModel)]="selectedData.name"
+            type="text"
+            [value]="selectedData.name"
+          />
+        </label>
+        <label>
+          Email:
+          <input
+            [(ngModel)]="selectedData.email"
+            type="email"
+            [value]="selectedData.email"
+          />
+        </label>
+        <label>
+          Phone:
+          <input
+            [(ngModel)]="selectedData.phone"
+            type="tel"
+            [value]="selectedData.phone"
+          />
+        </label>
+        <label>
+          Age:
+          <input
+            [(ngModel)]="selectedData.age"
+            type="number"
+            [value]="selectedData.age"
+          />
+        </label>
+      </div>
+
+      <div class="modal-footer">
+        <button (click)="closeModel($event)" class="btn cancel-btn">
+          Cancel
+        </button>
+        <button class="btn update-btn" (click)="updateModelBtn($event)">
+          Update
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
